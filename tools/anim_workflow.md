@@ -13,7 +13,7 @@
 
 ## 2. 编辑与保存
 
-1. 先在 docs/modules/<module>_assets.md 记录用途、尺寸、图集、动画名、时间线、Pivot 和清理条件。
+1. 在 `docs/modules/<module>_assets.md` 记录用途、尺寸、图集、动画名、时间线、Pivot 和清理条件。
 2. 用 Animation Editor 打开自己的 ANM2，参考现有素材结构，不直接复制原版图像发布。
 3. 保存到 mod/resources/gfx/effects/，图集与 ANM2 同目录且带模块 ID 前缀。
 4. Sprite.Load 写 gfx/effects/...anm2；XML 的 anm2path 相对 anm2root。
@@ -26,12 +26,11 @@
 ## 3. 源稿、过程稿与生成工具
 
 - tools/assets/ 保存仍有维护价值的源稿；mod/resources/ 只放运行时产物。
-- 旧占位脚本在本地历史目录留存；实际制作使用当前资源规格。
 - process_forbidden_fruit_assets.py 的输出包含旧藤蔓素材；运行前确认输出路径和需要保留的产物。
 - 预览同时展示原尺寸与最近邻放大，检查辨识度和像素边缘。
 
 ## 4. 验证后部署
 
-按 [agent_workflow.md](../docs/development/agent_workflow.md) 运行全量测试和资源检查。
+按 [工作流](../docs/development/agent_workflow.md) 检查修改过的资源；涉及 Lua 时追加代码检查。
 通过后部署 mod/ 到本地游戏、核对哈希并完全重启，再记录视觉场景。
-实机观察完整播放、锚点跟随和清理结果。
+实机观察本次修改的播放、锚点或清理行为。

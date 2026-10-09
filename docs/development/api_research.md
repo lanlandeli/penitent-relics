@@ -1,7 +1,6 @@
-# API 资料索引与待验证事项
+# API 资料索引
 
-核对日期：2026-10-09。范围：Repentance+ API、当前框架和开发流程。
-接口细节见 [框架参考](framework_api.md)，本页保留资料入口与具体待查事项。
+查引擎 API 使用下列资料；项目接口见 [框架参考](framework_api.md)。
 
 ## 1. 查阅顺序
 
@@ -31,19 +30,8 @@
 | [RNG](https://cuerzor.github.io/IsaacDocs/rep/RNG.html) | 显式种子与随机序列管理；module_guide |
 | [EntityPlayer](https://cuerzor.github.io/IsaacDocs/rep/EntityPlayer.html) | GetCollectibleRNG、AddCacheFlags/EvaluateItems；module_guide |
 
-## 3. 待验证与维护事项
+## 3. 使用与维护
 
-- 未查到公开且完整的 info_display.xml schema；当前格式来自仓库现有内容。
-  新条目必须在目标 Repentance+ 内置图鉴中确认。
-- entities2 文档的部分目录行为标有未测试；更改资源布局时在目标游戏验证加载。
-- 原版实体替换是否保留种子、特定激光的 offset、存档路径与热重载效果需目标构建验证。
-- Forbidden Fruit 的额外退出回调没有按当前要求完整使用 safeCall，额外回调的 enabled
-  检查也应逐项审查，修复需覆盖退出与禁用状态的回归。
-
-以上事项应在对应开发任务中验证并更新结论；已完成项移入历史记录。
-
-## 4. 维护方式
-
-新增或变更 API 时记录“链接 + 游戏版本 + 返回/过滤语义 + 本项目使用方式 + 验证状态”。
-接口实现变化更新 framework_api、教程与受影响模块文档；工程约定变化再同步 AGENTS。
-完整接口表集中维护，验收清单与执行结果分别记录。
+查 API 时重点看目标版本、参数、返回值和回调过滤条件。
+资料与实际表现有差异时，在对应 PR 或 Issue 中记录复现方式与结论。
+接口变化同步框架参考与调用示例；确定的玩法规则写入模块文档。

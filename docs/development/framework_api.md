@@ -1,6 +1,6 @@
 # 框架接口参考
 
-核对日期：2026-10-09。依据当前 [Manager](../../mod/framework/manager.lua)、
+对应实现：[Manager](../../mod/framework/manager.lua)、
 [Hooks](../../mod/framework/hooks.lua)、[Context](../../mod/framework/context.lua)、
 [Config](../../mod/framework/config.lua) 和 [Util](../../mod/framework/util.lua)。
 用法见 [模块教程](module_guide.md)，武器与效果组合见 [攻击兼容](attack_compatibility.md)。

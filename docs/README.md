@@ -1,6 +1,6 @@
 # 开发文档
 
-新道具从 [模块教程](development/module_guide.md) 开始；涉及攻击时，同时填写
+新道具从 [模块教程](development/module_guide.md) 开始；涉及攻击时，按改动范围查阅
 [攻击兼容清单](development/attack_compatibility.md)。提交与部署按 [工作流](development/agent_workflow.md) 执行。
 
 ```text
@@ -23,7 +23,7 @@ docs/
 | [视觉规范](development/custom_visuals.md) | 实体、动画、坐标、音效和清理 |
 | [美术工具](../tools/anim_workflow.md) | 编辑器、源稿和资源制作流程 |
 | [开发工作流](development/agent_workflow.md) | 查证、验证、部署、GitHub 与交接 |
-| [API 资料](development/api_research.md) | 资料链接与待核实事项 |
+| [API 资料](development/api_research.md) | 引擎 API 来源与查阅方法 |
 
 ## 模块文档
 
@@ -35,4 +35,5 @@ docs/
 
 新模块文档放入 `modules/`，并在上表追加入口。简单模块可合写规则与素材；
 内容较多时再拆成 `<module_id>_design.md` 与 `<module_id>_assets.md`。
-通用规则只在对应专题维护，模块文档保留玩法、实现差异和验收场景。
+通用规则在 development/ 维护，modules/ 记录玩法、实现差异和验收场景。
+提交的验证结果与问题跟踪放在 PR 或 Issue，确定的规则再更新到文档。
