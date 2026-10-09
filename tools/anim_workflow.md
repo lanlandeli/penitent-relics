@@ -1,15 +1,13 @@
 # 游戏资源与动画工具工作流
 
-规范见 [custom_visuals.md](../docs/custom_visuals.md)；本页只说明工具与文件流转。
+本页说明工具与文件流转，资源规格见 [视觉规范](../docs/custom_visuals.md)。
 
 ## 1. 定位工具
 
 在实际游戏安装目录的 tools 下查找 ResourceExtractor 和 IsaacAnimationEditor。
-当前部署脚本配置的游戏根目录为
-`E:\SteamLibrary\steamapps\common\The Binding of Isaac Rebirth`；
-该盘符是本机配置，不是所有机器的固定位置。
+游戏路径以本机安装位置为准，部署前核对 tools/deploy.bat 的配置。
 
-使用游戏随附工具的说明确认命令行参数，不将旧文档中的调用格式当作所有版本通用。
+工具参数以当前安装附带的说明为准。
 解包输出放被 Git 忽略的 ExtractedResources/ 或仓库外，仅用于研究结构；
 不要放入 mod/。分发素材前遵守游戏随附资源说明和素材授权。
 
@@ -22,20 +20,18 @@
 5. 在编辑器检查裁切、层、循环、完整播放和关键帧 Delay；
    再完成 XML 解析、PNG 格式与游戏内验证。
 
-自定义效果实体使用 content/entities2.xml 注册中性变体；
-不使用旧教程的固定 variant=600 示例，不把动画放入 mod/gfx。
+自定义效果实体使用 content/entities2.xml 注册中性变体，在运行时按名称解析。
 原生武器改色优先保留原 sprite；真正改泪弹变体需单独验证方向动画和协同。
 
 ## 3. 源稿、过程稿与生成工具
 
 - tools/assets/ 保存仍有维护价值的源稿；mod/resources/ 只放运行时产物。
-- 历史目录里的占位脚本仅供参考，带有旧硬编码输出路径，不能用于覆盖当前正式图标。
-- process_forbidden_fruit_assets.py 仍保留用于参考制作过程，但会输出旧藤蔓等素材；
-  不应把它当作“重建当前全部美术”的可靠入口。修改/运行前检查输出并隔离比较。
-- 预览需要同时展示原尺寸与最近邻放大；大图好看不能替代原尺寸辨识度。
+- 旧占位脚本在本地历史目录留存；实际制作使用当前资源规格。
+- process_forbidden_fruit_assets.py 的输出包含旧藤蔓素材；运行前确认输出路径和需要保留的产物。
+- 预览同时展示原尺寸与最近邻放大，检查辨识度和像素边缘。
 
 ## 4. 验证后部署
 
 按 [agent_workflow.md](../docs/agent_workflow.md) 运行全量测试和资源检查。
 通过后部署 mod/ 到本地游戏、核对哈希并完全重启，再记录视觉场景。
-动画预览、XML 解析和离线 mock 均不能代替游戏实际播放。
+实机观察完整播放、锚点跟随和清理结果。

@@ -1,6 +1,7 @@
-# Crude Salt / 粗盐 — 7.4.0 视觉契约
+# Crude Salt / 粗盐 — 规则与素材
 
-> 状态：历史实现记录（2026-08-12），当前模块 7.4.0。运行时素材为 PNG + ANM2；本次文档核对未重新进行游戏内视觉验收。
+当前模块版本：7.4.0。运行时素材为 PNG + ANM2。
+攻击与组合登记见 [兼容清单](attack_compatibility.md#3-模组攻击与效果登记)。
 
 ## 美术方向
 
@@ -23,7 +24,7 @@
 
 - 保留原版泪弹精灵及方向动画。
 - 只施加暖灰白、米黄色的四级颗粒色阶。
-- 不生成拖尾实体；旧配置 `trailInterval`、`trailScale`、`trailBackOffset` 已废弃。
+- 泪弹表现使用染色，不生成拖尾实体。
 
 ## 方向盐晶标记
 
@@ -31,7 +32,7 @@
 - ANM2：`mod/resources/gfx/effects/crude_salt_mark.anm2`
 - 图集：384×32，横排 12 帧，每帧 32×32。
 - `Appear` 与 `Crack` 保留在素材中，但运行时不再播放。
-- 标记不再生成 `EntityEffect`；Lua 持有独立 `Sprite` 并在 `onRender` 直接绘制。
+- Lua 持有独立 `Sprite`，在 `onRender` 绘制标记。
 - 精灵固定在 `Idle` 的清晰箭头帧并停止动画，不受效果实体自动清理影响。
 - 代码按命中时保存的移动向量旋转盐晶，使标记直接表达机制方向。
 - 标记在减益有效期间持续保持静态；重复命中只更新方向。
@@ -52,10 +53,11 @@
 ## 实体与生命周期
 
 盐晶碎裂使用 `content/entities2.xml` 注册的 `Penitent Relics Crude Salt Visual` 中性变体；方向
-标记是直接渲染的独立 `Sprite`。不得重新使用 `EffectVariant.POOF01` 承载盐印、泪弹拖尾
-或雕像消失效果。
+标记是直接渲染的独立 `Sprite`。通用注册和清理方式见 [视觉规范](custom_visuals.md)。
 
 ## 配置
+
+以下为主要表现参数，完整默认值见 [模块 config](../mod/modules/crude_salt/init.lua)。
 
 ```lua
 tearPulseInterval = 3

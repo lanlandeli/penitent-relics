@@ -1,6 +1,6 @@
 # Penitent Relics · 忏悔遗物
 
-《以撒的结合：忏悔+》内容扩展模组，持续加入原版风格的道具与玩法。
+《以撒的结合：忏悔+》道具扩展模组，围绕遗物的力量与代价，带来新的战斗体验。
 
 ## 道具
 
@@ -21,5 +21,4 @@
 
 通过 [Issues](https://github.com/lanlandeli/penitent-relics/issues) 反馈问题或提出道具想法。
 
-参与开发请阅读[协作规范](AGENTS.md)与[模块教程](docs/module_guide.md)；
-接口、架构和美术规范可从其中的文档链接查阅。
+开发说明见[文档目录](docs/README.md)，新道具从[模块教程](docs/module_guide.md)开始。

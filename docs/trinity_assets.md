@@ -3,7 +3,6 @@
 对应模块 2.7.3。玩法规则见 [设计契约](trinity_design.md)；
 通用格式、注册、坐标和验收要求见 [视觉规范](custom_visuals.md)，
 制作步骤见 [美术工具流程](../tools/anim_workflow.md)。
-以下规格描述当前资源，不作为当前构建已完成实机验收的证明。
 
 ## 1. 资源清单
 
@@ -23,7 +22,7 @@
 PNG 保持 RGBA；ANM2 图集引用为同目录文件名，Lua 加载路径以 gfx/ 起始。
 效果实体使用 [entities2.xml](../mod/content/entities2.xml) 注册的中性变体
 Penitent Relics Trinity Visual；按名称解析，再加载所需动画。
-激光起射使用独立 Sprite，不创建效果实体；不得用 POOF01 承载自定义动画。
+激光起射使用独立 Sprite，效果实体的注册方式见视觉规范。
 
 ## 2. 跟随、染色与渲染
 
@@ -33,12 +32,12 @@ Penitent Relics Trinity Visual；按名称解析，再加载所需动画。
   缩放使用 markSizeRatio/min/max 配置。只有两种持续印记，Spirit 不增加第三个长期图标。
 - 泪弹：保留原版精灵和方向动画，每 3 帧切换预制明暗色阶，SetColor 持续 4 帧；
   Duration 不代表淡入时长。没有额外 PNG、覆盖实体或拖尾。
-- 激光和妈刀：短时位格染色，保留原生 Variant、光路与碰撞；不承诺与其他模组的染色互不覆盖。
+- 激光和妈刀：短时位格染色，保留原生 Variant、光路与碰撞。
 - 翅膀：使用原版 Revelation costume 的运行期引用，失去道具或死亡时移除本模块维护的外观。
 
 审判光柱和地面光弧使用素材的 24 tick 时间线，代码负责定位、层级和结束清理，
 不逐帧覆写素材的缩放、旋转和透明度；不加屏幕震动。
-光晕视觉范围和 judgmentAoeRadius 分别验收，不能从素材边缘推导伤害范围。
+光晕视觉范围和 judgmentAoeRadius 分别验收。
 审判播放一次 SOUND_ANGEL_BEAM，默认音量 0.90、音高 1.00，重播间隔 6 帧；
 开关与数值来自模块配置。
 
@@ -54,7 +53,7 @@ Pulse 由逻辑 Update 推进；首次有效激光更新后播放，根仍存活
   WorldToScreen(Position) + RenderOffset，跟随本次实际绘制位置。
 
 需检查移动、角色缩放、变身、不同射向、圆形光束和永续光束。
-渲染不得推进位格或伤害计时。
+位格和伤害计时在逻辑更新中推进。
 
 ## 4. 清理与维护检查
 
@@ -64,4 +63,4 @@ Pulse 由逻辑 Update 推进；首次有效激光更新后播放，根仍存活
 
 修改素材后，核对 PNG 尺寸与 RGBA、ANM2 引用/动画名/时长、Lua 路径和原尺寸可读性；
 实机检查完整周期、层级、双印记不重叠、激光对齐及宿主消失后的清理。
-检查和测试部署顺序统一见 [工作流](agent_workflow.md)，不在素材清单重复部署命令。
+检查和测试部署见 [工作流](agent_workflow.md)。

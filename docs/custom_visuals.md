@@ -1,8 +1,7 @@
 # 自定义视觉、动画与音效
 
-这是项目的资源制作与运行时约定，不是所有以撒模组必须采用的唯一方案。
-代码入口见 [framework_api.md](framework_api.md)，工具操作见
-[anim_workflow.md](../tools/anim_workflow.md)，资料依据见 [api_research.md](api_research.md)。
+资源制作见 [工具流程](../tools/anim_workflow.md)；涉及伤害或命中效果时，另查
+[攻击兼容](attack_compatibility.md)。
 
 ## 1. 先选择表现方式
 
@@ -14,11 +13,8 @@
 | 场景中的独立特效 | 注册中性 ENTITY_EFFECT 变体 | 创建、碰撞禁用、跟随、清理 |
 | 真正改变泪弹外观/变体 | 单独设计并验证的自定义泪弹 | 方向动画、原版变体和协同兼容 |
 
-单纯染色不替换原武器 sprite。确需新变体时，不套用“variant 从 600 起一定安全”的旧教程。
-注册唯一名称并运行时解析，检查是否与已有内容冲突。
-
-自定义效果不能用 POOF01 等原生行为变体当容器：替换 ANM2 不会移除变体本身的引擎逻辑。
-这是仓库已有视觉问题形成的约束；不能因此推断所有原生效果都具有相同生命周期。
+单纯染色保留原武器 sprite；新变体注册唯一名称并在运行时解析。
+自定义场景动画使用中性效果变体；POOF01 等原生变体在替换 ANM2 后仍带有原生行为。
 
 ## 2. 资源路径
 
@@ -34,7 +30,7 @@
 路径大小写必须与磁盘一致；资源归属用模块 ID 前缀表达。
 PNG 为 RGBA；像素图标按最终 32×32 验收，再用最近邻放大查边缘。
 透明图可以原生带 Alpha，也可以色键去背；最终检查透明边缘、残色和裁切。
-硬轮廓像素图避免平滑缩小；柔光特效可以有半透明渐变，不能一概要求硬 Alpha。
+硬轮廓像素图使用最近邻缩放；柔光特效可保留半透明渐变。
 
 ## 3. 注册中性效果实体
 
@@ -49,21 +45,15 @@ PNG 为 RGBA；像素图标按最终 32×32 验收，再用最近邻放大查边
 
 本仓库根节点为 `<entities anm2root="gfx/effects/" version="5">`。
 这里 id=1000 是 ENTITY_EFFECT 的类型，不是道具本地 ID。
-省略 variant 让引擎分配，随后用 Isaac.GetEntityVariantByName 解析；
-并非“name 本身决定一个固定数字”。
-[entities2.xml 文档](https://cuerzor.github.io/IsaacDocs/rep/xml/entities2.html)
-对部分目录行为标有未测试，当前仓库的布局仍需目标游戏验证。
+省略 variant 让引擎分配，随后用 Isaac.GetEntityVariantByName 解析。
+字段说明见 [entities2.xml](https://cuerzor.github.io/IsaacDocs/rep/xml/entities2.html)。
 
-在 onRegister 解析名称；结果无效时只警告一次并跳过该视觉，规则继续运行。
-现有 Crude Salt/Trinity 有 EFFECT_NULL 降级路径，这是现有实现，
-不应将其宣传成所有新模块都必需的“双兜底”。
-模块须明确选择降级方案并验证，禁止改用 POOF01。
+在 onRegister 解析名称；结果无效时记录一次警告并跳过表现，保留已完成的规则结算。
 
 生成函数应检查 ToEffect 转换，使用 ENTCOLL_NONE 与 COLLISION_NONE，接受实际动画名参数。
-持续效果可用 SetTimeout(-1) 并由模块显式清理；不要把该值当成自动清理机制。
+持续效果可用 SetTimeout(-1)，结束时由模块显式清理。
 参考 [Trinity spawnVisual](../mod/modules/trinity/init.lua)，
-调用方收到 nil 时必须跳过表现，不能中断已完成的规则结算。
-不要求所有动画都叫 Idle：现有 Pulse、Shatter、Q0–Q4 都有独立用途。
+调用方处理 nil 结果；动画名与素材保持一致，例如 Idle、Pulse、Shatter、Q0–Q4。
 
 ## 4. 时间线与推进
 
@@ -72,7 +62,7 @@ Delay 之和描述该层时间跨度。**不能将 FrameNum 再乘以 Delay。**
 例如 trinity_laser_muzzle 的 Pulse 是 38 tick，关键帧 Delay 为
 3+4+5+5+7+7+4+3=38；图集中只有 8 张图，不代表只有 8 tick。
 
-每份动画核对：
+动画检查项：
 
 - 动画名、Loop、FrameNum、各层 Delay 总和，RootAnimation 与层时间线是否匹配；
 - 图集宽高、XCrop/YCrop、Width/Height、Pivot，不超出 PNG；
@@ -85,23 +75,20 @@ Delay 之和描述该层时间跨度。**不能将 FrameNum 再乘以 Delay。**
 [Sprite API](https://cuerzor.github.io/IsaacDocs/rep/Sprite.html#update)
 
 动画的主要动作在素材中表达；位置跟随、轨道、适配尺寸与细微呼吸可以由代码控制。
-38 tick 是本项目激光脉冲素材规格，不是所有硫磺火寿命的通用保证。
 
 ## 5. 染色与坐标
 
 `Entity:SetColor(color, duration, priority, fadeout, share)` 的第二参是持续时间，
-不是淡入时间；false 的 fadeout 也不能证明存在颜色插值。
-反复更换色阶是否平滑需实机观察，不承诺自动混合或完全兼容其他染色。
+色阶切换的平滑程度和覆盖优先级在游戏中检查。
 [Entity.SetColor](https://cuerzor.github.io/IsaacDocs/rep/Entity.html#setcolor)
 
 世界位置、视觉偏移和屏幕位置分别处理；同一偏移只加一次。
 优先使用对应实体的 Render 回调 offset，避免在全局 Render 中猜测该实体本次插值位置。
 Trinity 当前对圆形激光采用 WorldToScreen(laser.Position) + offset，
-直线激光采用自身路径/起射位置逻辑；这是该模块的实现策略，不是所有特效的统一公式。
+直线激光采用自身路径/起射位置逻辑。按具体实体的坐标约定选择计算方式。
 大小适配根据需要使用 Size、SizeMulti、SpriteScale 和素材 Pivot，避免重复应用缩放。
 
-测试提供明显非零的 offset、变化的角色尺寸和移动的激光圆环；
-零偏移截图无法证明对齐正确。
+对齐测试覆盖非零 offset、角色尺寸变化和移动的激光圆环。
 
 ## 6. 生命周期清理
 
@@ -128,12 +115,10 @@ FrameDelay 是允许同音效再次播放前的帧数，不是延迟开始播放
 [SFXManager.Play](https://cuerzor.github.io/IsaacDocs/rep/SFXManager.html#play)
 
 优先使用合适的原生 SoundEffect，音量、音高和开关进入配置。
-自定义音效不是框架禁止项；确有需求时核对 sounds.xml、格式和来源授权后另行接入。
-没有这一需求时，不为预留能力添加音频资源或新框架。
+自定义音效通过 sounds.xml 接入，核对格式、资源路径和素材来源。
 
-## 8. 验收
+## 8. 验证
 
 离线验证路径、动画名、变体选择、到期前一帧/到期帧、循环重播、重复创建和清理。
 Mock 只实现实际调用的方法，并模拟失效、类型转换失败及配置关闭。
-XML 可解析不证明引擎会播放；必须记录原尺寸图标、完整动画、移动锚点、
-宿主消失与换房残留的实机场景。未验证时明确写“未游戏内验证”。
+实机检查原尺寸图标、完整动画、移动锚点、宿主消失和换房清理，记录结果与未覆盖项。

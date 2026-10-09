@@ -10,5 +10,7 @@
 
 ## 兼容与后续
 
+涉及攻击时，列出[兼容清单](https://github.com/lanlandeli/penitent-relics/blob/main/docs/attack_compatibility.md)中受影响的攻击/组合及验证结果。
+
 列出公共接口、配置、资源路径或版本变化，以及尚未覆盖的场景；无则写“无”。
 完整工程要求见 [AGENTS.md](https://github.com/lanlandeli/penitent-relics/blob/main/AGENTS.md) 和开发工作流。

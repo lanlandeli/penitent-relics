@@ -1,7 +1,6 @@
 # Lua 与文档风格
 
-以 [AGENTS.md](../AGENTS.md) 为契约。接口不在本页重复定义，
-查 [framework_api.md](framework_api.md)；验证查 [agent_workflow.md](agent_workflow.md)。
+本页约定命名、格式和常用写法。接口见 [框架参考](framework_api.md)。
 
 ## 1. 命名、语言与格式
 
@@ -27,17 +26,16 @@ Markdown 用相对链接连接仓库文件；示例标明可直接运行还是�
 
 目标检查按引用存在 → Exists → 类型符合 → 未死亡的顺序进行。
 不要先对可能失效的引用调用 IsDead。纯配置/数学 helper 尽量不依赖 Isaac 全局，便于测试。
-不为微小性能猜测把清晰的小函数合并成大函数；先避免实际的逐帧重复扫描和分配。
+性能优化先检查逐帧重复扫描和分配，函数划分保持清晰。
 [IsaacDocs 代码实践](https://wofsauge.github.io/IsaacDocs/rep/tutorials/GoodPractices.html)
 
 ## 3. Lua 5.3 兼容子集
 
-允许位运算和 table.unpack；禁止 unpack、loadstring、getfenv/setfenv 等旧接口。
-不要把离线 Lua 支持某库等同于游戏运行时开放该库。
+使用 Lua 5.3 的位运算和 table.unpack；新增库调用先确认游戏运行时提供该接口。
 含 nil 的可变参数转发用 select("#", ...) 记录数量，再 table.unpack(args, 1, count)；
 嵌套闭包不可直接引用外层 ...。
 
-bool 和 nil 必须区分；不要用 `value or fallback` 处理允许 false 的配置。
+允许 false 的配置用 nil 判断缺省值，保留 false 与 nil 的区别。
 Entity userdata 不作跨回调表键；GetPtrHash 用于运行期索引，EntityPtr 用于跨帧引用。
 不把哈希、指针或 Sprite 序列化到存档。
 
@@ -64,7 +62,6 @@ safeCall 是 Lua 异常边界，不是事务：报错前产生的实体和状态
 测试使用最小但真实的语义桩，断言结果、重复触发和失败路径；
 不要把实现逐行翻译成测试，或让关键 API 永远成功。
 独立运行每个 test_*.lua，避免全局 mock 在测试间串用。
-文档中的示例也应通过语法检查；可解析与游戏内正确是不同层次的结论。
+文档示例通过语法检查；引擎行为另在游戏中验证。
 
-只修改任务所需格式，保留已有开发改动。通用指南描述当前能力，模块设计记录产品规则，
-查证记录列出证据与未知项，不复制一份未来框架当成既有 API。
+修改格式时保留现有开发改动。文档分工与入口见 [目录](README.md)。
