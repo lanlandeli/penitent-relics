@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ============================================================================
+  Penitent Relics item pool configuration.
+  items.xml registers the item; this file controls which pools can contain it.
+  Pool Name values include treasure / shop / boss / devil / angel / secret /
+     library / beggar / curse / greedTreasure / greedShop / greedBoss ...
+     ============================================================================ -->
+<ItemPools>
+	<Pool Name="treasure">
+		<Item Name="Crude Salt" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+	</Pool>
+	<Pool Name="angel">
+		<Item Name="Trinity" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+	</Pool>
+	<Pool Name="secret">
+		<Item Name="Forbidden Fruit" Weight="0.5" DecreaseBy="1" RemoveOn="0.1"/>
+	</Pool>
+</ItemPools>

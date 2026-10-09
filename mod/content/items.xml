@@ -1,0 +1,6 @@
+<items gfxroot="gfx/items/" version="1">
+<!-- Collectible sprites live in resources/gfx/items/collectibles; gfx is the filename only. -->
+	<passive id="1000" name="Crude Salt" description="Don't look back!" gfx="crude_salt.png" quality="2" tags="nocantrip"/>
+	<passive id="1001" name="Trinity" description="The Father, the Son and the Holy Spirit." gfx="trinity.png" quality="4" tags="nocantrip angel tearsup" soulhearts="6" cache="firedelay flying"/>
+	<passive id="1002" name="Forbidden Fruit" description="Knowledge has a price" gfx="forbidden_fruit.png" quality="3" tags="nocantrip" cache="damage"/>
+</items>

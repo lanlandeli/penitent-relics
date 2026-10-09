@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <name>Penitent Relics</name>
+    <directory>PenitentRelics</directory>
+    <description>A vanilla-styled Repentance+ item expansion with new relics, mechanics, and visual effects.</description>
+	<version>0.35.0</version>
+    <visibility>Private</visibility>
+    <tag id="Lua"/>
+</metadata>

@@ -1,0 +1,72 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Lua and assets
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Install Lua 5.3
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes lua5.3
+
+      - name: Check Lua syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            luac5.3 -p "$file"
+          done < <(find mod tests -type f -name '*.lua' -print0)
+
+      - name: Run all regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          tests=(tests/test_*.lua)
+          if (( ${#tests[@]} == 0 )); then
+            echo "No regression tests found."
+            exit 1
+          fi
+          for test in "${tests[@]}"; do
+            echo "Running $test"
+            lua5.3 "$test"
+          done
+
+      - name: Parse XML and animations
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          files = sorted(
+              path for path in Path("mod").rglob("*")
+              if path.suffix.lower() in {".xml", ".anm2"}
+          )
+          if not files:
+              raise SystemExit("No XML or ANM2 files found.")
+          for path in files:
+              ET.parse(path)
+          print(f"Parsed {len(files)} XML/ANM2 files.")
+          PY
+
+      - name: Check commit whitespace
+        run: git show --format= --check HEAD

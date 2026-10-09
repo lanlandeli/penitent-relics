@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collectibles>
+    <collectible id="1000">
+        <info text="40% chance for tears, lasers, and knives to record an enemy's movement direction"/>
+        <info text="Chance scales up to 100% at 8 Luck"/>
+        <info text="An enemy that reverses direction for 3 frames shatters into a salt statue"/>
+        <info text="Bosses trigger the shatter but take 5x Isaac's damage instead"/>
+    </collectible>
+    <collectible id="1001">
+        <info text="+3 Soul Hearts, flight, and +0.7 tears"/>
+        <info text="Attacks cycle through Father, Son, and Spirit"/>
+        <info text="Father marks enemies for 5 seconds"/>
+        <info text="Son deals 1.5x damage; 3x against Father's Mark, then applies Son's Mark"/>
+        <info text="Spirit homes and deals 2x damage"/>
+        <info text="Spirit hitting both marks triggers Judgment: 5x hit, 2x area damage, clears marks"/>
+    </collectible>
+    <collectible id="1002">
+        <info text="Two temporary Treasure Room items appear in each floor's starting room"/>
+        <info text="Choose one before leaving; refusing has no penalty"/>
+        <info text="Each choice costs one heart container; Keepers pay the native coin price"/>
+        <info text="For this floor: -0/10/20/30/40% damage based on the chosen item's quality"/>
+    </collectible>
+</collectibles>

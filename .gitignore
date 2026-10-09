@@ -1,0 +1,31 @@
+# 忽略文件
+
+# 游戏解包产物（仅本地参考，禁止随项目发布）
+ExtractedResources/
+extracted/
+
+# 日志与临时文件
+*.log
+*.tmp
+tmp/
+
+# 部署输出（如有）
+deploy/
+
+# 会话工具数据
+.zcode/
+
+# 便携 Lua 解释器（tools/luacheck 用，可随时按 README 重新下载）
+tools/lua/
+
+# Python generated caches
+__pycache__/
+*.py[cod]
+
+# Local credentials
+.env
+.env.*
+!.env.example
+
+# Local archive; not part of the public repository
+/历史/
