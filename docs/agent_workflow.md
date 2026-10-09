@@ -62,6 +62,9 @@ IsaacDocs 是社区维护资料，不是无条件的引擎行为保证。
 
 ## 5. 自动验证：在仓库根目录运行
 
+Windows 本地使用 Lua 5.3.6，将 lua53.exe、luac53.exe 和 lua53.dll 放入 tools/lua/。
+该工具目录不纳入 Git，新克隆需自行准备；GitHub Actions 会安装 Lua 5.3。
+
 以下 PowerShell 会发现全部 test_*.lua，避免清单漏掉新增测试。
 任何命令失败就停止，不继续部署。
 
