@@ -81,7 +81,7 @@ Lua 5.3 测试也不提供真实 Isaac 引擎。
 $files = Get-ChildItem -LiteralPath mod -Recurse -File |
     Where-Object { $_.Extension -in ".xml", ".anm2" }
 foreach ($file in $files) {
-    $null = [xml](../Get-Content -LiteralPath $file.FullName -Raw)
+    $null = [xml](Get-Content -LiteralPath $file.FullName -Raw)
 }
 ```
 
