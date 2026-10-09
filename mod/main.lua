@@ -10,7 +10,7 @@
 --   The framework handles the engineering concerns: pcall-isolated module
 --   loading, central game-callback registration and dispatch, GetData-based
 --   ownership marks, config merging, and an anti-recursion incidental-damage
---   helper. See docs/module_guide.md to add a new item.
+--   helper. See docs/development/module_guide.md to add a new item.
 -- ============================================================================
 
 local MOD_NAME = "Penitent Relics"

@@ -1,5 +1,5 @@
 -- Trinity
--- A reusable item module for Penitent Relics (design: docs/trinity_design.md).
+-- A reusable item module for Penitent Relics (design: docs/modules/trinity_design.md).
 --
 -- Player attacks cycle through three aspects (Father -> Son -> Spirit) using a
 -- per-player counter. Each aspect tints the attack and has its own hit
@@ -100,7 +100,7 @@ local TIER_PULSE_COLORS = {
 }
 
 -- Custom ANM2 paths; assets land in mod/resources/gfx/effects/ and are loaded
--- relative to the mod resource root (see docs/trinity_assets.md).
+-- relative to the mod resource root (see docs/modules/trinity_assets.md).
 local ORB_ANM2 = "gfx/effects/trinity_orb.anm2"
 local FATHER_MARK_ANM2 = "gfx/effects/trinity_mark_father.anm2"
 local SON_MARK_ANM2 = "gfx/effects/trinity_mark_son.anm2"
@@ -220,7 +220,7 @@ function M:onEvaluateCache(player, cacheFlag)
         player.CanFly = true
     elseif cacheFlag == CacheFlag.CACHE_FIREDELAY then
         -- Tears are converted via fire delay so +0.7 tears is not a flat
-        -- MaxFireDelay subtraction (docs/trinity_design.md section 4.1).
+        -- MaxFireDelay subtraction (docs/modules/trinity_design.md section 4.1).
         local bonus = self:cfg("tearsBonus", 0.7)
         if bonus > 0 then
             local currentTears = 30 / (player.MaxFireDelay + 1)
@@ -1041,7 +1041,7 @@ end
 
 function M:onNewRoom()
     -- Marks are room-scoped; the rotation restarts per room so every room
-    -- begins with Father (docs/trinity_design.md section 5.2).
+    -- begins with Father (docs/modules/trinity_design.md section 5.2).
     self:clearJudgmentEffects()
     self:clearLaserMuzzleEffects()
     self.activeLasers = {}

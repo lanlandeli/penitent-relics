@@ -2,7 +2,7 @@
 
 当前模块版本：2.7.3。本文记录玩法规则、状态和验收场景。
 素材与表现见 [美术清单](trinity_assets.md)，攻击登记和跨模块组合见
-[兼容清单](attack_compatibility.md)。
+[兼容清单](../development/attack_compatibility.md)。
 
 ## 1. 核心规则
 
@@ -13,7 +13,7 @@ Trinity 是 Q4 被动道具：按 Father → Son → Spirit 轮转攻击，依�
 - 内容本地 ID 为 1001，运行时按名称解析；进入 angel 池，现有权重参数为
   Weight=1、DecreaseBy=1、RemoveOn=0.1。
 - 拾取文案为 “The Father, the Son and the Holy Spirit.”；机制说明维护于模块 EID 与
-  [内置图鉴](../mod/content/info_display.xml)。
+  [内置图鉴](../../mod/content/info_display.xml)。
 
 下表数值是默认配置，倍率基于这次命中传入的原始 amount：
 
@@ -63,12 +63,12 @@ Boss 使用相同规则，实际扣血仍受引擎伤害机制影响。
 
 附带伤害来源使用 EntityRef(player)，通道为模块 ID 加攻击哈希；激光优先使用根哈希。
 不要复用原始武器 EntityRef 引发后续帧递归。Trinity 使用显式攻击通道；Crude Salt 当前使用默认通道，两者的组合检查见兼容清单。
-去重范围和返回值见 [框架伤害边界](framework_api.md#5-附带伤害的边界)。
+去重范围和返回值见 [框架伤害边界](../development/framework_api.md#5-附带伤害的边界)。
 
 ## 4. 配置与属性
 
-完整默认值只维护于 [模块 config](../mod/modules/trinity/init.lua)，覆盖写入
-[mod/config.lua](../mod/config.lua) 的 modules.trinity，读取统一经过 self:cfg()。
+完整默认值只维护于 [模块 config](../../mod/modules/trinity/init.lua)，覆盖写入
+[mod/config.lua](../../mod/config.lua) 的 modules.trinity，读取统一经过 self:cfg()。
 本文第 1–3 节列出玩法默认值；不在文档中复制整张配置表。
 
 - sonMarkedDamageMult 是 Father 印记下对 sonDamageMult 的追加乘数，默认 1.5 × 2 = 3。
@@ -109,9 +109,9 @@ Boss 使用相同规则，实际扣血仍受引擎伤害机制影响。
 
 ## 6. 维护与验收
 
-修改前同时检索 [实现](../mod/modules/trinity/init.lua)、
-[回归测试](../tests/test_trinity.lua)、相关内容 XML 和素材。
-既有注册、资源与框架接口直接复用；通用检查及部署顺序见 [工作流](agent_workflow.md)。
+修改前同时检索 [实现](../../mod/modules/trinity/init.lua)、
+[回归测试](../../tests/test_trinity.lua)、相关内容 XML 和素材。
+既有注册、资源与框架接口直接复用；通用检查及部署顺序见 [工作流](../development/agent_workflow.md)。
 
 下表列出验收场景，自动覆盖见测试断言，实机结果记录对应构建与操作：
 

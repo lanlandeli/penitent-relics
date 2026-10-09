@@ -8,7 +8,7 @@ MODROOT="$(dirname "$0")/../mod"
 
 if [ ! -f "$LUAC" ]; then
     echo "[ERROR] $LUAC not found."
-    echo "        Install the portable Lua 5.3 build into tools/lua/ (see docs/agent_workflow.md)."
+    echo "        Install the portable Lua 5.3 build into tools/lua/ (see docs/development/agent_workflow.md)."
     exit 1
 fi
 

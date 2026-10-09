@@ -15,10 +15,10 @@
 ## 使用
 
 将 `mod/` 中的内容复制到游戏模组目录下的 `PenitentRelics/` 文件夹，
-重启游戏并在 Mods 菜单启用。开发和测试部署见[工作流](docs/agent_workflow.md)。
+重启游戏并在 Mods 菜单启用。开发和测试部署见[工作流](docs/development/agent_workflow.md)。
 
 ## 反馈与开发
 
 通过 [Issues](https://github.com/lanlandeli/penitent-relics/issues) 反馈问题或提出道具想法。
 
-开发说明见[文档目录](docs/README.md)，新道具从[模块教程](docs/module_guide.md)开始。
+开发说明见[文档目录](docs/README.md)，新道具从[模块教程](docs/development/module_guide.md)开始。

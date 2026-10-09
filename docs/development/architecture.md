@@ -1,7 +1,7 @@
 # Penitent Relics 架构与模块边界
 
 项目采用模块化结构组织道具与玩法，目标游戏为 Repentance+。
-工程约定见 [AGENTS.md](../AGENTS.md)，
+工程约定见 [AGENTS.md](../../AGENTS.md)，
 实际接口见 [framework_api.md](framework_api.md)。
 
 ## 1. 分层与依赖
@@ -69,4 +69,4 @@
 现有 setEnabled 没有资源清理协议，不应作为玩家可用的热切换功能。
 
 模块接入见 [教程](module_guide.md)，跨攻击与效果协作见 [兼容清单](attack_compatibility.md)。
-完整文档入口见 [目录](README.md)。
+完整文档入口见 [目录](../README.md)。

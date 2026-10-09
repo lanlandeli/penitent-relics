@@ -1,13 +1,13 @@
 # Penitent Relics 开发规范
 
-本文件约定仓库的工程边界。模块接入与示例见 [模块教程](docs/module_guide.md)，
-接口签名见 [框架参考](docs/framework_api.md)，执行步骤见 [开发工作流](docs/agent_workflow.md)。
+本文件约定仓库的工程边界。模块接入与示例见 [模块教程](docs/development/module_guide.md)，
+接口签名见 [框架参考](docs/development/framework_api.md)，执行步骤见 [开发工作流](docs/development/agent_workflow.md)。
 
 ## 1. 项目约定
 
 目标游戏为 Repentance+，Lua 代码与离线测试采用 Lua 5.3 兼容语法。
 新增引擎调用时，核对目标版本的参数、返回值和使用条件；
-API 资料入口见 [api_research.md](docs/api_research.md)。
+API 资料入口见 [api_research.md](docs/development/api_research.md)。
 
 暂不考虑联机实现。
 
@@ -26,7 +26,10 @@ mod/
   resources/               游戏运行时资源
 tests/                     Lua 回归测试
 tools/                     检查、部署与资源制作工具
-docs/                      开发文档
+docs/
+  README.md                文档目录
+  development/             通用开发规范、教程与参考
+  modules/                 各道具的设计、素材与验收
 ```
 
 - 一件道具或独立玩法放在一个模块内，按需拆分规则、状态、表现和清理函数。
@@ -78,10 +81,10 @@ id 与目录一致，name 为英文名，version 使用 MAJOR.MINOR.PATCH；
 
 ## 6. 验证与交接
 
-按 [工作流第 5 节](docs/agent_workflow.md#5-自动验证在仓库根目录运行) 执行 Lua 语法、
+按 [工作流第 5 节](docs/development/agent_workflow.md#5-自动验证在仓库根目录运行) 执行 Lua 语法、
 全部 tests/test_*.lua 和差异检查；资源修改追加 XML/ANM2、图片与引用检查。
 
-攻击相关变更更新 [兼容清单](docs/attack_compatibility.md)，登记新攻击并检查受影响的组合。
+攻击相关变更更新 [兼容清单](docs/development/attack_compatibility.md)，登记新攻击并检查受影响的组合。
 包含状态、概率、伤害、实体替换、主动道具返回值或碰撞语义的模块增加对应回归测试。
 覆盖未触发、正常触发、重复触发、失效与清理；Boss 差异和公共接口变更按实际功能补充。
 Mock 体现关键 API 语义，用断言验证可观察结果。

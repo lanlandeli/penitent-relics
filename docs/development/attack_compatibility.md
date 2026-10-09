@@ -52,7 +52,7 @@
 具体组合还需交叉检查多发、分裂、弹跳、追踪、穿透、爆炸、蓄力和武器替换。
 同一武器既有近战又有远程阶段时，分别登记结果。
 
-当前 [Context](../mod/framework/context.lua) 识别 tear、laser、knife、bomb；
+当前 [Context](../../mod/framework/context.lua) 识别 tear、laser、knife、bomb；
 DAMAGE_LASER 可将伤害归为 laser，普通玩家来源则需要额外的来源恢复。
 ctx.weaponType 是框架填写的粗分类，区分上述武器时还要检查实际实体、Variant 和回调。
 记录来源时使用 EntityRef 的 Type/Variant/SpawnerType、Entity、DamageFlag 及逻辑帧号。
@@ -74,8 +74,8 @@ ctx.weaponType 是框架填写的粗分类，区分上述武器时还要检查�
 | trinity.judgment | 双印记触发的范围伤害 | Spirit 命中；沿用该攻击通道与玩家来源 | 主目标补伤害；其他目标 AOE；清除主目标印记 | 主目标排除、同帧多个审判、二次触发、目标先死亡 |
 | forbidden_fruit.damage | 影响攻击数值的属性效果 | 成交后通过 CACHE_DAMAGE 更新玩家伤害 | 按品质降低本层伤害，换层恢复 | 面板计算与命中 amount 的区别、延迟攻击是否取快照 |
 
-实现与数值：[粗盐](crude_salt_assets.md)、[三位一体](trinity_design.md)、
-[禁果](forbidden_fruit_design.md)。
+实现与数值：[粗盐](../modules/crude_salt_assets.md)、[三位一体](../modules/trinity_design.md)、
+[禁果](../modules/forbidden_fruit_design.md)。
 
 当前粗盐与 Trinity 接入 tear/laser/knife，bomb 保持原行为；表中其余原版路径按具体场景补查。
 Trinity 补伤害和粗盐碎裂均以玩家为来源，设计上不再次触发武器命中效果。
@@ -129,9 +129,9 @@ Trinity 补伤害和粗盐碎裂均以玩家为来源，设计上不再次触发
 ## 5. 记录与维护
 
 模块测试覆盖确定的规则，实机验证回调时序与最终表现。
-现有入口：[test_framework](../tests/test_framework.lua)、
-[test_trinity](../tests/test_trinity.lua)、[test_crude_salt](../tests/test_crude_salt.lua)、
-[test_forbidden_fruit](../tests/test_forbidden_fruit.lua)。
+现有入口：[test_framework](../../tests/test_framework.lua)、
+[test_trinity](../../tests/test_trinity.lua)、[test_crude_salt](../../tests/test_crude_salt.lua)、
+[test_forbidden_fruit](../../tests/test_forbidden_fruit.lua)。
 
 将下面的表格放在所属模块的兼容小节中；每行是一组可复现的场景：
 

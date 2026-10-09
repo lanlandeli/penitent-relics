@@ -1,6 +1,6 @@
 # 开发、验证与部署工作流
 
-先读 [AGENTS.md](../AGENTS.md)。此文档给出执行顺序，接口语义只在
+先读 [AGENTS.md](../../AGENTS.md)。此文档给出执行顺序，接口语义只在
 [framework_api.md](framework_api.md) 维护，视觉细则见 [custom_visuals.md](custom_visuals.md)。
 
 ## 1. 修改前：契约、现场、搜索
@@ -81,7 +81,7 @@ Lua 5.3 测试也不提供真实 Isaac 引擎。
 $files = Get-ChildItem -LiteralPath mod -Recurse -File |
     Where-Object { $_.Extension -in ".xml", ".anm2" }
 foreach ($file in $files) {
-    $null = [xml](Get-Content -LiteralPath $file.FullName -Raw)
+    $null = [xml](../Get-Content -LiteralPath $file.FullName -Raw)
 }
 ```
 
@@ -156,7 +156,7 @@ git push -u origin HEAD
 等待 Validate 通过并检查 diff 后合并。任务开始和合并后同步 main，避免在过期分支持续开发。
 不要强推 main；不要把其他参与者未完成的修改混入当前提交。
 
-[Validate](../.github/workflows/validate.yml) 在 push、pull_request 和手动触发时运行：
+[Validate](../../.github/workflows/validate.yml) 在 push、pull_request 和手动触发时运行：
 Ubuntu 安装 Lua 5.3，检查 mod/tests 语法，自动执行全部 test_*.lua，解析 XML/ANM2 并检查提交空白。
 CI 使用独立环境；游戏部署和实机验收按第 6 节执行。
 失败时打开该次 Actions 日志，修复后推送同一分支重新检查。

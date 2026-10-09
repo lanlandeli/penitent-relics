@@ -6,7 +6,7 @@
 -- "my_item" maps to modules/my_item/init.lua).
 -- Modules may implement
 -- passive or active collectibles, stats, room logic, attacks, or visuals.
--- Development guide: docs/module_guide.md
+-- Development guide: docs/development/module_guide.md
 -- ============================================================================
 return {
     "crude_salt",    -- Item: Crude Salt

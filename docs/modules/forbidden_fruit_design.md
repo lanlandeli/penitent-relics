@@ -3,7 +3,7 @@
 当前模块版本：3.1.0；模块 ID：`forbidden_fruit`；内容本地 ID：`1002`。
 
 本页记录交易、楼层伤害和表现规则。与其他攻击的数值关系见
-[兼容清单](attack_compatibility.md#4-组合检查)。
+[兼容清单](../development/attack_compatibility.md#4-组合检查)。
 
 ## 1. 核心规则
 
@@ -94,7 +94,7 @@ Fruit 本体也不提前清除已结算的当层减伤。
 - `pr_forbidden_fruit_original_seed`
 
 跨帧引用使用 `EntityPtr`，表索引使用 `GetPtrHash`。
-存档写入模组共用的 SaveData，格式为 FF3，兼容 FF2；扩展协议见 [架构](architecture.md#4-状态按生命周期归属)。
+存档写入模组共用的 SaveData，格式为 FF3，兼容 FF2；扩展协议见 [架构](../development/architecture.md#4-状态按生命周期归属)。
 继续游戏时恢复 spawned/resolved/declined、选项 ID、选择者品质与伤害倍率，保持交易只结算一次。
 
 ## 6. 表现

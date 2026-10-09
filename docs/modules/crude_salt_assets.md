@@ -1,7 +1,7 @@
 # Crude Salt / 粗盐 — 规则与素材
 
 当前模块版本：7.4.0。运行时素材为 PNG + ANM2。
-攻击与组合登记见 [兼容清单](attack_compatibility.md#3-模组攻击与效果登记)。
+攻击与组合登记见 [兼容清单](../development/attack_compatibility.md#3-模组攻击与效果登记)。
 
 ## 美术方向
 
@@ -53,11 +53,11 @@
 ## 实体与生命周期
 
 盐晶碎裂使用 `content/entities2.xml` 注册的 `Penitent Relics Crude Salt Visual` 中性变体；方向
-标记是直接渲染的独立 `Sprite`。通用注册和清理方式见 [视觉规范](custom_visuals.md)。
+标记是直接渲染的独立 `Sprite`。通用注册和清理方式见 [视觉规范](../development/custom_visuals.md)。
 
 ## 配置
 
-以下为主要表现参数，完整默认值见 [模块 config](../mod/modules/crude_salt/init.lua)。
+以下为主要表现参数，完整默认值见 [模块 config](../../mod/modules/crude_salt/init.lua)。
 
 ```lua
 tearPulseInterval = 3

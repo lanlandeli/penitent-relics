@@ -1,8 +1,8 @@
 # Trinity / 三位一体 — 素材与表现
 
 对应模块 2.7.3。玩法规则见 [设计契约](trinity_design.md)；
-通用格式、注册、坐标和验收要求见 [视觉规范](custom_visuals.md)，
-制作步骤见 [美术工具流程](../tools/anim_workflow.md)。
+通用格式、注册、坐标和验收要求见 [视觉规范](../development/custom_visuals.md)，
+制作步骤见 [美术工具流程](../../tools/anim_workflow.md)。
 
 ## 1. 资源清单
 
@@ -20,7 +20,7 @@
 | trinity_laser_muzzle | 384×48 / 48×48，8 帧 | Pulse，38 tick，不循环 | 中性光种展开为三片细弧，无实心块、符文、烟雾或拖尾 |
 
 PNG 保持 RGBA；ANM2 图集引用为同目录文件名，Lua 加载路径以 gfx/ 起始。
-效果实体使用 [entities2.xml](../mod/content/entities2.xml) 注册的中性变体
+效果实体使用 [entities2.xml](../../mod/content/entities2.xml) 注册的中性变体
 Penitent Relics Trinity Visual；按名称解析，再加载所需动画。
 激光起射使用独立 Sprite，效果实体的注册方式见视觉规范。
 
@@ -63,4 +63,4 @@ Pulse 由逻辑 Update 推进；首次有效激光更新后播放，根仍存活
 
 修改素材后，核对 PNG 尺寸与 RGBA、ANM2 引用/动画名/时长、Lua 路径和原尺寸可读性；
 实机检查完整周期、层级、双印记不重叠、激光对齐及宿主消失后的清理。
-检查和测试部署见 [工作流](agent_workflow.md)。
+检查和测试部署见 [工作流](../development/agent_workflow.md)。

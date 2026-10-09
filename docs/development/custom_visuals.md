@@ -1,6 +1,6 @@
 # 自定义视觉、动画与音效
 
-资源制作见 [工具流程](../tools/anim_workflow.md)；涉及伤害或命中效果时，另查
+资源制作见 [工具流程](../../tools/anim_workflow.md)；涉及伤害或命中效果时，另查
 [攻击兼容](attack_compatibility.md)。
 
 ## 1. 先选择表现方式
@@ -52,7 +52,7 @@ PNG 为 RGBA；像素图标按最终 32×32 验收，再用最近邻放大查边
 
 生成函数应检查 ToEffect 转换，使用 ENTCOLL_NONE 与 COLLISION_NONE，接受实际动画名参数。
 持续效果可用 SetTimeout(-1)，结束时由模块显式清理。
-参考 [Trinity spawnVisual](../mod/modules/trinity/init.lua)，
+参考 [Trinity spawnVisual](../../mod/modules/trinity/init.lua)，
 调用方处理 nil 结果；动画名与素材保持一致，例如 Idle、Pulse、Shatter、Q0–Q4。
 
 ## 4. 时间线与推进

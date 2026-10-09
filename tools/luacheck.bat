@@ -2,7 +2,7 @@
 REM ============================================================================
 REM Penitent Relics Lua syntax check (Windows double-click version)
 REM Runs luac -p on every .lua file under mod/
-REM Requires tools/lua/luac53.exe (portable Lua 5.3; see docs/agent_workflow.md)
+REM Requires tools/lua/luac53.exe (portable Lua 5.3; see docs/development/agent_workflow.md)
 REM ============================================================================
 setlocal enabledelayedexpansion
 set "LUAC=%~dp0lua\luac53.exe"
@@ -10,7 +10,7 @@ set "MODROOT=%~dp0..\mod"
 
 if not exist "%LUAC%" (
     echo [ERROR] %LUAC% not found.
-    echo         Install the portable Lua 5.3 build into tools\lua\ ^(see docs/agent_workflow.md^).
+    echo         Install the portable Lua 5.3 build into tools\lua\ ^(see docs/development/agent_workflow.md^).
     exit /b 1
 )
 

@@ -1,6 +1,6 @@
 # 游戏资源与动画工具工作流
 
-本页说明工具与文件流转，资源规格见 [视觉规范](../docs/custom_visuals.md)。
+本页说明工具与文件流转，资源规格见 [视觉规范](../docs/development/custom_visuals.md)。
 
 ## 1. 定位工具
 
@@ -13,7 +13,7 @@
 
 ## 2. 编辑与保存
 
-1. 先在 docs/<module>_assets.md 记录用途、尺寸、图集、动画名、时间线、Pivot 和清理条件。
+1. 先在 docs/modules/<module>_assets.md 记录用途、尺寸、图集、动画名、时间线、Pivot 和清理条件。
 2. 用 Animation Editor 打开自己的 ANM2，参考现有素材结构，不直接复制原版图像发布。
 3. 保存到 mod/resources/gfx/effects/，图集与 ANM2 同目录且带模块 ID 前缀。
 4. Sprite.Load 写 gfx/effects/...anm2；XML 的 anm2path 相对 anm2root。
@@ -32,6 +32,6 @@
 
 ## 4. 验证后部署
 
-按 [agent_workflow.md](../docs/agent_workflow.md) 运行全量测试和资源检查。
+按 [agent_workflow.md](../docs/development/agent_workflow.md) 运行全量测试和资源检查。
 通过后部署 mod/ 到本地游戏、核对哈希并完全重启，再记录视觉场景。
 实机观察完整播放、锚点跟随和清理结果。
